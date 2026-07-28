@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
-import { db, storage } from "./firebase";
+import { db } from "./firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 import {
   Search, MapPin, Instagram, Clock, Eye, Plus, X, Lock, ArrowLeft,
   ChevronDown, MessageCircle, Grid3x3, Star, Pencil, Trash2, Power,
@@ -122,12 +122,6 @@ async function loadBusinesses() {
 }
 async function saveBusinesses(list) {
   await setDoc(DOC_REF, { list });
-}
-async function uploadImage(file) {
-  const path = `mizona/${uid()}-${file.name.replace(/[^a-zA-Z0-9.\-_]/g, "")}`;
-  const storageRef = ref(storage, path);
-  await uploadBytes(storageRef, file);
-  return getDownloadURL(storageRef);
 }
 
 /* ---------- piezas visuales chicas ---------- */
